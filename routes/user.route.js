@@ -1,0 +1,26 @@
+const auth = require("../controllers/userController");
+const authJwt = require("../middewares/authJwt");
+const express = require("express");
+const router = express()
+router.post("/user/registration", auth.registration);
+router.post("/user/login", auth.signin);
+router.get("/user/getProfile", [authJwt.verifyToken], auth.getProfile);
+router.put("/user/update", [authJwt.verifyToken], auth.update);
+router.post("/user/addAdress", [authJwt.verifyToken], auth.addAdress);
+router.get("/user/getAdress", [authJwt.verifyToken], auth.getAdress);
+router.put("/user/updateAdress/:id", [authJwt.verifyToken], auth.updateAdress);
+router.delete("/user/deleteAdress/:id", [authJwt.verifyToken], auth.deleteAdress);
+router.post("/user/createWishlist/:id", [authJwt.verifyToken], auth.createWishlist);
+router.post("/user/removeFromWishlist/:id", [authJwt.verifyToken], auth.removeFromWishlist);
+router.get("/user/myWishlist", [authJwt.verifyToken], auth.myWishlist);
+router.post("/user/addToCart", [authJwt.verifyToken], auth.addToCart);
+router.get("/user/getCart", [authJwt.verifyToken], auth.getCart);
+router.put("/user/updateQuantity", [authJwt.verifyToken], auth.updateQuantity);
+router.put("/user/deleteProductfromCart/:cartProductId", [authJwt.verifyToken], auth.deleteProductfromCart);
+router.delete("/user/deleteCart", [authJwt.verifyToken], auth.deleteCart);
+router.post("/user/checkout", [authJwt.verifyToken], auth.checkout);
+router.post("/user/placeOrder/:orderId", [authJwt.verifyToken], auth.placeOrder);
+router.get("/user/allOrders", [authJwt.verifyToken], auth.getAllOrders);
+router.get("/user/Orders", [authJwt.verifyToken], auth.getOrders);
+router.get("/user/viewOrder/:id", [authJwt.verifyToken], auth.getOrderbyId);
+module.exports = router;
